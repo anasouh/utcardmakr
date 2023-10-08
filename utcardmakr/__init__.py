@@ -4,4 +4,4 @@ __license__ = 'MIT'
 __copyright__ = 'Copyright 2023 - anasouh'
 __version__ = '0.1'
 
-from main import create_card, Rarity, Color, Image
+from utcardmakr.main import create_card, Rarity, Color, Image

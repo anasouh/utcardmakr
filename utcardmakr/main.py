@@ -1,9 +1,9 @@
 from PIL import Image, ImageDraw, ImageFont
-from const import *
+from utcardmakr.const import *
 
 def resize_or_thumbnail(img: Image, size: tuple):
     if img.size[0] > size[0] or img.size[1] > size[1]:
-        img.thumbnail(size)
+        img.thumbnail(size, Image.LANCZOS)
     else:
         img = img.resize(size)
     return img
@@ -17,11 +17,20 @@ def create_base_card(rarity: Rarity, color: Color):
 
 def add_face(img: Image, face_fp: str):
     face = Image.open(face_fp)
-    face = resize_or_thumbnail(face, (482, 529))
+    pos = (184, 139)
+    MAX_WIDTH = 482
+    height = 529
+    new_width = int((height / face.size[1]) * face.size[0])
+    if new_width > MAX_WIDTH:
+        diff = new_width - MAX_WIDTH
+        height -= diff
+        new_width = MAX_WIDTH
+        pos = (pos[0], pos[1]+diff)
+    face = face.resize((new_width, height))
     try:
-        img.paste(face, (184, 139), mask=face)
+        img.paste(face, pos, mask=face)
     except ValueError:
-        img.paste(face, (184, 139))
+        img.paste(face, pos)
 
 def add_overall(img: Image, overall: str):
     draw = ImageDraw.Draw(img)
@@ -30,7 +39,7 @@ def add_overall(img: Image, overall: str):
         overall,
         fill="#40351d",
         font=ImageFont.truetype(
-            "fonts/condensed/Numbers-Bold.ttf", size=124
+            "assets/fonts/condensed/Numbers-Bold.ttf", size=124
         ),
         align="center",
     )
@@ -42,7 +51,7 @@ def add_position(img: Image, position: str):
         position,
         fill="#40351d",
         font=ImageFont.truetype(
-            "fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf", size=56
+            "assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf", size=56
         ),
         align="center",
     )
@@ -65,15 +74,17 @@ def add_country(img: Image, country_fp: str):
 
 def add_name(img: Image, name: str):
     draw = ImageDraw.Draw(img)
-    draw.text(
-        (258.65, 681.07),
+    W, H = img.size
+    font = ImageFont.truetype(
+        "assets/fonts/CruyffSans-Bold.ecd5078c.otf", size=72
+    )
+    _, _, w, h = draw.textbbox(
+        (0, 0),
         name,
-        fill="#40351d",
-        font=ImageFont.truetype(
-            "fonts/CruyffSans-Bold.ecd5078c.otf", size=72
-        ),
+        font=font,
         align="center",
     )
+    draw.text(((W-w)/2, 681.07), name, font=font, fill="#40351d")
 
 def create_card(rarity: Rarity, color: Color, face_fp: str, overall: str, position: str, name: str, club_fp: str, country_fp: str):
     img = create_base_card(rarity, color)
