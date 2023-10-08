@@ -8,7 +8,6 @@ def resize_or_thumbnail(img: Image, size: tuple):
         img = img.resize(size)
     return img
 
-#  Create a new image 726x897 and make the card_bg cover it
 def create_base_card(rarity: Rarity, color: Color):
     img = Image.new("RGBA", (726, 897), (0, 0, 0, 0))
     card_bg = Image.open(CARD_BG_SMALL[rarity.value][color.value])
@@ -16,7 +15,6 @@ def create_base_card(rarity: Rarity, color: Color):
     img.paste(card_bg, (0, 0))
     return img
 
-#  Paste the face on the card size: 482x529, on position 184x139
 def add_face(img: Image, face_fp: str):
     face = Image.open(face_fp)
     face = resize_or_thumbnail(face, (482, 529))
@@ -25,8 +23,6 @@ def add_face(img: Image, face_fp: str):
     except ValueError:
         img.paste(face, (184, 139))
 
-# Create text "82" with the font "cards/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Bold.otf"
-# Size: 124,09 pt, color: #40351d, position: 44,91x122,76px
 def add_overall(img: Image, overall: str):
     draw = ImageDraw.Draw(img)
     draw.text(
@@ -39,8 +35,6 @@ def add_overall(img: Image, overall: str):
         align="center",
     )
 
-# Create text "ST" with the font "cards/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf"
-# Size: 56,77 pt, color: #40351d, position: 82,84x248,35px
 def add_position(img: Image, position: str):
     draw = ImageDraw.Draw(img)
     draw.text(
@@ -53,7 +47,6 @@ def add_position(img: Image, position: str):
         align="center",
     )
 
-# Add the club logo size: 130x130, position: 60x325
 def add_club(img: Image, club_fp: str):
     club_logo = Image.open(club_fp)
     club_logo = resize_or_thumbnail(club_logo, (130, 130))
@@ -62,7 +55,6 @@ def add_club(img: Image, club_fp: str):
     except ValueError:
         img.paste(club_logo, (60, 325))
 
-# Add the country logo size: 118x72, position: 51x498
 def add_country(img: Image, country_fp: str):
     flag = Image.open(country_fp)
     flag = resize_or_thumbnail(flag, (130, 84))
@@ -71,7 +63,6 @@ def add_country(img: Image, country_fp: str):
     except ValueError:
         img.paste(flag, (51, 498))
 
-# Add the player name with the font "cards/fonts/CruyffSans-Bold.ecd5078c.otf" size: 72,15 pt, color: #40351d, position: 258.65x681.07px
 def add_name(img: Image, name: str):
     draw = ImageDraw.Draw(img)
     draw.text(
