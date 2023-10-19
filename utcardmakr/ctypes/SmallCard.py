@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 from utcardmakr.const import *
-from utcardmakr.types import Card
+from utcardmakr.ctypes import Card
 from utcardmakr.utils import *
 
 class SmallCard(Card):
@@ -39,7 +39,7 @@ class SmallCard(Card):
             overall,
             fill="#40351d",
             font=ImageFont.truetype(
-                "assets/fonts/condensed/Numbers-Bold.ttf", size=124
+                get_font_fp("assets/fonts/condensed/Numbers-Bold.ttf"), size=124
             ),
             align="center",
         )
@@ -50,7 +50,7 @@ class SmallCard(Card):
         TEXTBOX_W = 120
         TEXTBOX_X = 50
         font = ImageFont.truetype(
-            "assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf", size=56
+            get_font_fp("assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf"), size=56
         )
         _, _, w, h = draw.textbbox(
             (0, 0),
@@ -89,7 +89,7 @@ class SmallCard(Card):
         draw = ImageDraw.Draw(img)
         W, H = img.size
         font = ImageFont.truetype(
-            "assets/fonts/CruyffSans-Bold.ecd5078c.otf", size=72
+            get_font_fp("assets/fonts/CruyffSans-Bold.ecd5078c.otf"), size=72
         )
         _, _, w, h = draw.textbbox(
             (0, 0),

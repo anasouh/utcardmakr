@@ -1,6 +1,6 @@
 from PIL import Image, ImageDraw, ImageFont
 from utcardmakr.const import *
-from utcardmakr.types.Card import Card
+from utcardmakr.ctypes.Card import Card
 from utcardmakr.utils import *
 
 class LargeCard(Card):
@@ -39,7 +39,7 @@ class LargeCard(Card):
             overall,
             fill="#40351d",
             font=ImageFont.truetype(
-                "assets/fonts/condensed/Numbers-Bold.ttf", size=124
+                get_font_fp("assets/fonts/condensed/Numbers-Bold.ttf"), size=124
             ),
             align="center",
         )
@@ -50,7 +50,7 @@ class LargeCard(Card):
         TEXTBOX_W = 120
         TEXTBOX_X = 50
         font = ImageFont.truetype(
-            "assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf", size=56
+            get_font_fp("assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Regular.otf"), size=56
         )
         _, _, w, h = draw.textbbox(
             (0, 0),
@@ -101,7 +101,7 @@ class LargeCard(Card):
         draw = ImageDraw.Draw(img)
         W, H = img.size
         font = ImageFont.truetype(
-            "assets/fonts/CruyffSans-Bold.ecd5078c.otf", size=72
+            get_font_fp("assets/fonts/CruyffSans-Bold.ecd5078c.otf"), size=72
         )
         _, _, w, h = draw.textbbox(
             (0, 0),
@@ -115,7 +115,7 @@ class LargeCard(Card):
     def create_attribute(name: str, avg: str) -> Image.Image:
         img = Image.new("RGBA", (83, 100), (0, 0, 0, 0))
         draw = ImageDraw.Draw(img)
-        font_fp = "assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Medium.otf"
+        font_fp = get_font_fp("assets/fonts/condensed/CruyffSansCondensed+DINArabic+SSTThai-Medium.otf")
         font = ImageFont.truetype(font_fp, size=38)
         _, _, w, h = draw.textbbox(
             (0, 0),
