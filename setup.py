@@ -21,16 +21,22 @@ packages = [
     'utcardmakr.types'
 ]
 
+package_data = {
+    '': ['assets/*']
+}
+
 setup(
     name='utcardmakr',
     author='anasouh',
     url='https://github.com/anasouh/utcardmakr',
     version="0.1.0",
     packages=packages,
+    package_data=package_data,
     license='MIT',
     description='Create your custom EA FC Ultimate Team card !',
     long_description=readme,
     long_description_content_type="text/markdown",
     install_requires=requirements,
     python_requires='>=3.9.0',
+    include_package_data=True,
 )
