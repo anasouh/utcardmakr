@@ -22,7 +22,7 @@ packages = [
 ]
 
 package_data = {
-    '': ['assets/*']
+    '': ['assets/*/*/*']
 }
 
 setup(
