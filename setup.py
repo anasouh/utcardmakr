@@ -18,7 +18,7 @@ with open('README.md') as f:
 
 packages = [
     'utcardmakr',
-    'utcardmakr.types'
+    'utcardmakr.ctypes'
 ]
 
 package_data = {
