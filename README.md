@@ -15,7 +15,7 @@ pip install git+https://github.com/anasouh/utcardmakr
 
 | Small                                               | Large                                               |
 |-----------------------------------------------------|-----------------------------------------------------|
-| <img src="assets/examples/small.png" width="250px"> | <img src="assets/examples/large.png" width="250px"> |
+| <img src="utcardmakr/assets/examples/small.png" width="250px"> | <img src="utcardmakr/assets/examples/large.png" width="250px"> |
 
 
 ## Usage
